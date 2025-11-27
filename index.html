@@ -1,0 +1,384 @@
+>
+# Página Informativa (HTML + TailwindCSS)
+
+Archivos incluidos:
+- `index.html` - página principal (HTML + Tailwind via CDN).
+- `enviar.php` - script PHP para enviar el formulario por correo.
+
+Instrucciones rápidas:
+1. Sube `index.html` y `enviar.php` a tu servidor (hosting con soporte PHP para enviar correos).
+2. Abre `enviar.php` y reemplaza la variable `$to` por tu correo destino.
+3. Asegúrate de que la función `mail()` esté habilitada en tu servidor o configura un SMTP (puedes usar bibliotecas como PHPMailer si tu hosting requiere autenticación SMTP).
+4. Prueba el formulario desde la página y verifica la carpeta de SPAM si no recibes el correo.
+
+---
+
+<!-- FILE: index.html -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Cabaña la Jungla </title>
+  <meta name="description" content="Hospedaje y recorridos pueblos mágicos" />
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Pequeñas modificaciones de diseño */
+    .brand-blue { color: #047857; } /* emerald-600 */
+    .brand-bg { background-color: #ecfdf5; } /* emerald-50 */
+  </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800 bg-white">
+  <!-- NAV -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex justify-between items-center py-4">
+        <a href="#inicio" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold">XXXXXXX</div>
+          <span class="text-lg font-semibold brand-blue">Cabaña la Jungla</span>
+        </a>
+        <nav class="hidden md:flex gap-6 items-center text-sm">
+          <a href="#inicio" class="hover:underline">Inicio</a>
+          <a href="#sobre" class="hover:underline">Sobre</a>
+          <a href="#servicios" class="hover:underline">Servicios</a>
+          <a href="#galeria" class="hover:underline">Galería</a>
+          <a href="#faq" class="hover:underline">FAQ</a>
+          <a href="#contacto" class="px-4 py-2 border border-emerald-600 rounded text-emerald-600 hover:bg-emerald-50">Contacto</a>
+        </nav>
+        <div class="md:hidden">
+          <button id="btn-menu" aria-label="Abrir menú" class="p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t">
+      <div class="px-4 py-3 flex flex-col gap-2">
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto" class="px-4 py-2 border border-emerald-600 rounded text-emerald-600">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="inicio" class="brand-bg py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 brand-blue">Cabaña la Jungla </h1>
+        <p class="max-w-3xl mx-auto text-lg text-gray-700 mb-8"> Ofrecemos una increíble experiencia de hospedaje y recorridos, en la Sierra Norotiental de Puebla; entre dos pueblos mágicos. Conoce nuestros servicios, contáctanos fácilmente.</p>
+        <div class="flex justify-center gap-4">
+          <a href="#servicios" class="px-6 py-3 rounded-md bg-emerald-600 text-white font-medium">Ver servicios</a>
+          <a href="#contacto" class="px-6 py-3 rounded-md border border-emerald-600 text-emerald-600">Contactar</a>
+        </div>
+      </div>
+        <!-- Mapa embebido -->
+    <div class="w-full h-80 mt-8 rounded-xl overflow-hidden shadow">
+        <center>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5642.861646263432!2d-97.42725825573632!3d20.01709309092512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85daf2cf919af5ff%3A0x99ce7b72d565f4a5!2sCABA%C3%91A%20LA%20JUNGLA!5e0!3m2!1ses!2sus!4v1764230048070!5m2!1ses!2sus" width="80%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+    <!-- SOBRE -->.    
+
+    <section id="sobre" class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-3 brand-blue">Sobre nosotros</h2>
+          <p class="text-gray-700 mb-4">Somos una empresa que se dedica al Turismo y Hospedaje con rutas turísticas de Paseos al fondo de la Sierra.</p><br>
+          <ul class="space-y-2 text-gray-700">
+            <li>✔ Hospedaje en cabaña con vista a la sierra</li>
+            <li>✔ Paseos al fondo de la Sierra de Puebla</li>
+            <li>✔ Rapel, Tirolesa y Senderismo</li>
+          </ul>
+        </div>
+        <div>
+          <img src="sobrenosotros.jpeg" alt="interior" class="rounded-lg shadow-lg object-cover w-full h-64 md:h-60" />.  
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-8 brand-blue text-center">Nuestros Servicios</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="p-6 border rounded-lg shadow-sm">
+            <h3 class="font-semibold mb-2">Servicio A</h3>
+            <p class="text-sm text-gray-600 mb-3">Descripción breve del servicio A y cómo ayuda al cliente.</p>
+            <a href="#contacto" class="text-sm font-medium text-emerald-600">Solicitar</a>
+          </article>
+          <article class="p-6 border rounded-lg shadow-sm">
+            <h3 class="font-semibold mb-2">Servicio B</h3>
+            <p class="text-sm text-gray-600 mb-3">Descripción breve del servicio B y beneficios.</p>
+            <a href="#contacto" class="text-sm font-medium text-emerald-600">Solicitar</a>
+          </article>
+          <article class="p-6 border rounded-lg shadow-sm">
+            <h3 class="font-semibold mb-2">Servicio C</h3>
+            <p class="text-sm text-gray-600 mb-3">Descripción breve del servicio C y resultados esperados.</p>
+            <a href="#contacto" class="text-sm font-medium text-emerald-600">Solicitar</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria" class="py-16 brand-bg">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-6 brand-blue text-center">Galería</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <img src="image1.jpeg" alt="Galería 1" width="500" height="400" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image2.jpeg" alt="Galería 1" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image3.jpeg" alt="Galería 1" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image4.jpeg" alt="Galería 1" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image5.jpeg" alt="Galería 2" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image6.jpeg" alt="Galería 2" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image7.jpeg" alt="Galería 2" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image8.jpeg" alt="Galería 2" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image9.jpeg" alt="Galería 3" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image10.jpeg" alt="Galería 3" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image11.jpeg" alt="Galería 3" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image12.jpeg" alt="Galería 3" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image13.jpeg" alt="Galería 4" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image14.jpeg" alt="Galería 4" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image15.jpeg" alt="Galería 4" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image16.jpeg" alt="Galería 4" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image17.jpeg" alt="Galería 5" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image18.jpeg" alt="Galería 5" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image19.jpeg" alt="Galería 5" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image20.jpeg" alt="Galería 5" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image21.jpeg" alt="Galería 6" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image22.jpeg" alt="Galería 6" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image23.jpeg" alt="Galería 6" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+          <img src="image24.jpeg" alt="Galería 6" class="w-full h-40 object-cover rounded-lg shadow transition-transform duration-300 hover:scale-105" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-6 brand-blue text-center">Preguntas frecuentes</h2>
+        <div class="space-y-4">
+          <details class="p-4 border rounded">
+            <summary class="font-semibold">¿Cómo contrato un servicio?</summary>
+            <p class="mt-2 text-gray-700">Puedes contactarnos a través del formulario o enviando un correo; te responderemos con una propuesta.</p>
+          </details>
+          <details class="p-4 border rounded">
+            <summary class="font-semibold">¿Qué métodos de pago aceptan?</summary>
+            <p class="mt-2 text-gray-700">Aceptamos pago por transferencia y plataformas convencionales. Consultar con ventas para opciones corporativas.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-6 brand-blue text-center">Contacto</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-gray-700 mb-4">Escríbenos tus dudas, solicitudes o si deseas realizar una reservación o cotización. Te responderemos lo antes posible.</p>
+            <ul class="text-gray-700 space-y-2">
+             
+          <br><br>
+            <li><strong>Dirección:</strong> Kilometro 1 Carretera Federal Mazatepec-      <h><h>Cuetzalan, Tlatlauquitepec, Puebla.</li>
+              <li><strong>Teléfono:</strong> +52 233 103 0972</li>
+              <li><strong>Email:</strong> clauskar@hotmail.com</li>
+            </ul>
+          </div>
+
+          <div>
+            <form id="contactForm" action="enviar.php" method="POST" class="space-y-4 bg-emerald-50 p-6 rounded-lg" novalidate>
+              <!-- Honeypot (anti-spam) -->
+              <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <div>
+                <label class="block text-sm font-medium mb-1">Nombre</label>
+                <input required name="nombre" type="text" class="w-full px-3 py-2 border rounded" placeholder="Tu nombre" />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+                <input required name="email" id="email" type="email" class="w-full px-3 py-2 border rounded" placeholder="tu@correo.com" />
+                <p id="emailError" class="text-sm text-red-600 mt-1 hidden">Introduce un correo válido.</p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium mb-1">Asunto</label>
+                <input required name="asunto" type="text" class="w-full px-3 py-2 border rounded" placeholder="Asunto" />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium mb-1">Mensaje</label>
+                <textarea required name="mensaje" rows="4" class="w-full px-3 py-2 border rounded" placeholder="Tu mensaje..."></textarea>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <button id="submitBtn" type="submit" class="px-4 py-2 rounded bg-emerald-600 text-white">Enviar mensaje</button>
+                <p id="formMsg" class="text-sm text-gray-600"></p>
+              </div>
+            </form>
+
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-emerald-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm"><center> © "Cabaña la Jungla" — Todos los derechos reservados.</center> </p>  
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('btn-menu').addEventListener('click', function(){
+      const m = document.getElementById('mobile-menu');
+      m.classList.toggle('hidden');
+    });
+
+    // Simple email validation + form feedback
+    const form = document.getElementById('contactForm');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMsg = document.getElementById('formMsg');
+
+    function validateEmail(email) {
+      // Simple regex (sufficient for basic validation)
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    emailInput.addEventListener('input', () => {
+      if (!validateEmail(emailInput.value)) {
+        emailError.classList.remove('hidden');
+      } else {
+        emailError.classList.add('hidden');
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      if (!validateEmail(emailInput.value)) {
+        e.preventDefault();
+        emailError.classList.remove('hidden');
+        emailInput.focus();
+        return;
+      }
+
+      // Disable button to avoid double submit
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      formMsg.textContent = '';
+    });
+  </script>
+    <!-- Sección de Redes Sociales -->
+    <section id="redes" class="max-w-5xl mx-auto bg-white mt-10 p-8 rounded-2xl shadow text-center">
+        <h2 class="text-3xl font-bold mb-6 text-green-600">Síguenos en redes</h2>
+        <div class="flex justify-center gap-8 text-lg">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=100060712997129&sk=reviews" target="_blank" class="text-green-600 hover:scale-110 transition inline-flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1 .9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12"/></svg>
+                Facebook
+            </a>
+
+            <!-- Instagram (placeholder) -->
+            <a href="https://wa.me/522331030972" class="text-green-600 hover:scale-110 transition inline-flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.8-.9a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2z"/></svg>
+                Instagram
+            </a>
+
+           
+            </a>
+
+        </div>
+    </section>
+
+    
+    <!-- Botón flotante <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.341A8 8 0 104.572 15.34L12 21l7.428-5.659z"/></svg> -->
+    <a href="https://goo.gl/maps/vjB58CoMyN12" target="_blank" class="fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow-xl hover:bg-green-700 transition z-50">
+        Cómo llegar
+    </a>
+    <!-- Botón flotante WhatsApp -->
+    <a href="#" id="btnWhatsApp" target="_blank" class="fixed bottom-6 left-6 bg-[#25D366] text-white px-5 py-3 rounded-full font-semibold shadow-xl hover:bg-[#1ebe5d] transition z-50 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.52 3.48A11.8 11.8 0 0 0 12 0C5.37 0 0 5.37 0 12a11.9 11.9 0 0 0 1.64 6L0 24l6.3-1.62A12 12 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.6c-2.04 0-3.96-.54-5.7-1.56l-.42-.24-3.72.96.99-3.57-.27-.45A9.6 9.6 0 0 1 2.4 12c0-5.28 4.32-9.6 9.6-9.6 2.58 0 5.01 1.02 6.84 2.85A9.6 9.6 0 0 1 21.6 12c0 5.28-4.32 9.6-9.6 9.6zm5.16-7.26c-.3-.15-1.77-.87-2.04-.97-.27-.09-.48-.15-.69.15-.21.3-.78.96-.96 1.17-.18.21-.36.24-.66.09-.3-.15-1.26-.45-2.4-1.44-.9-.81-1.5-1.8-1.68-2.1-.18-.3-.02-.46.14-.61.15-.15.3-.36.45-.54.15-.18.2-.3.3-.51.1-.21.05-.39-.02-.54-.09-.15-.69-1.65-.96-2.28-.24-.57-.48-.48-.69-.48h-.57c-.21 0-.54.09-.81.39-.27.3-1.05 1.02-1.05 2.49 0 1.47 1.08 2.88 1.23 3.09.15.21 2.13 3.24 5.16 4.44.72.3 1.29.48 1.74.63.73.23 1.39.2 1.92.12.59-.09 1.77-.72 2.01-1.41.24-.69.24-1.29.18-1.41-.06-.12-.27-.21-.57-.36z"/>
+        </svg>
+        WhatsApp
+    </a>
+</body>
+</html>
+
+
+<!-- FILE: enviar.php -->
+<?php
+// enviar.php - script básico para recibir el formulario y enviarlo por correo.
+// IMPORTANTE: reemplaza el correo en $to por tu dirección real.
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo 'Método no permitido';
+    exit;
+}
+
+// Anti-spam honeypot
+if (!empty($_POST['website'])) {
+    // Bot detected
+    header('Location: /?error=spam');
+    exit;
+}
+
+$nombre = trim($_POST['nombre'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$asunto = trim($_POST['asunto'] ?? 'Nuevo mensaje desde web');
+$mensaje = trim($_POST['mensaje'] ?? '');
+
+$errors = [];
+if (empty($nombre)) $errors[] = 'Nombre vacío.';
+if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Correo inválido.';
+if (empty($mensaje)) $errors[] = 'Mensaje vacío.';
+
+if (!empty($errors)) {
+    // Puedes redirigir con mensajes o mostrar una página de error
+    header('Location: /?error=validation');
+    exit;
+}
+
+// Reemplaza por tu correo destino
+$to = 'tucorreo@ejemplo.com';
+$subject = "Contacto web: " . $asunto;
+
+$body = "Has recibido un nuevo mensaje desde el formulario de contacto:\n\n";
+$body .= "Nombre: $nombre\n";
+$body .= "Email: $email\n";
+$body .= "Asunto: $asunto\n\n";
+$body .= "Mensaje:\n$mensaje\n";
+
+$headers = "From: $nombre <$email>\r\n";
+$headers .= "Reply-To: $email\r\n";
+$headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+
+// Intento de envío
+$sent = mail($to, $subject, $body, $headers);
+
+if ($sent) {
+    // Redirige a una página de gracias o muestra mensaje
+    header('Location: /?success=1');
+    exit;
+} else {
+    header('Location: /?error=send');
+    exit;
+}
+?>
